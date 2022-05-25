@@ -3,7 +3,7 @@
 namespace RMS_Model
 {
     // 定义房间实体
-    class Room
+    public class Room
     {
         private string[] STATUS = {"空闲", "已住人", "预约", "维修" };
         private string[] TYPES = {"单人房", "标准房", "豪华房", "商务房" };

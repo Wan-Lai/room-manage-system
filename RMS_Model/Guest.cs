@@ -3,7 +3,7 @@
 namespace RMS_Model
 {
     // 客人实体
-    class Guest
+    public class Guest
     {
         // 客人编号
         public int GuestNo

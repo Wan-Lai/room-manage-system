@@ -3,7 +3,7 @@
 namespace RMS_Model
 {
     // 定义员工实体
-    class Employee
+    public class Employee
     {
         private string[] POSITIONS = {"前台", "服务员", "经理"};
         // 员工编号
@@ -15,6 +15,13 @@ namespace RMS_Model
 
         // 员工姓名
         public string EmployeeName
+        {
+            set;
+            get;
+        }
+
+        // 员工密码
+        public string EmployeePassword
         {
             set;
             get;
