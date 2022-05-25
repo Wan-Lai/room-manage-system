@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Data;
 
 namespace RMS_Dao
 {
@@ -15,7 +10,7 @@ namespace RMS_Dao
         private static readonly string constr =
         ConfigurationManager.ConnectionStrings["connectionStr"].ConnectionString;
         //2.执行增删改的
-        public static int ExecuteNonQuery(string sql, params SqlParameter[] pms)
+        public static int executeNonQuery(string sql, params SqlParameter[] pms)
         {
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -33,7 +28,7 @@ namespace RMS_Dao
         }
 
         //3.执行返回单个值的
-        public static object ExecuteScalar(string sql, params SqlParameter[] pms)
+        public static object executeScalar(string sql, params SqlParameter[] pms)
         {
             using (SqlConnection con = new SqlConnection(constr))
             {
@@ -50,7 +45,7 @@ namespace RMS_Dao
         }
 
         //4.执行返回SqlDataReader
-        public static SqlDataReader ExecuteReader(string sql, params SqlParameter[] pms)
+        public static SqlDataReader executeReader(string sql, params SqlParameter[] pms)
         {
             //创建链接对象
             SqlConnection con = new SqlConnection(constr);
