@@ -24,8 +24,15 @@ namespace RMS_Dao
             employee.EmployeeTel = "12312311313";
             employee.EmployeeId = "64131313231231413131";
 
+            // 添加员工
+            Employee_Dao.addEmployee(employee);
+            // 删除员工
             Employee_Dao.deleteEmployee(1);
-            
+            // 修改员工
+            Employee_Dao.modifyEmployee(1,employee);
+            // 查询员工
+            Employee_Dao.selectAllEmployee();
+
         }
     }
 }
