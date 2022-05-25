@@ -1,21 +1,17 @@
-﻿using System;
+﻿using RMS_Model;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RMS_Model;
 
 namespace RMS_Dao
 {
-    class UserLogin_Dao
+    public class Employee_Dao
     {
 
         // 添加用户
         public static int addEmployee(Employee employee)
         {
             // 编号 姓名 密码 性别 年龄 职位 电话 身份证号
-            string sql = "INSERT INTO employee(e_no, e_name, e_password, e_gender, e_age, e_position, e_phone, e_id) VALUES(@no, @name, @password, @gender, @age, @position, @phone, @id)";
+            string sql = "INSERT INTO employee(e_no, e_name, e_password, e_gender, e_age, e_position, e_tel, e_id) VALUES(@no, @name, @password, @gender, @age, @position, @tel, @id)";
             SqlParameter[] sqlParameters = {
                 new SqlParameter("@no", employee.EmployeeNo),
                 new SqlParameter("@name", employee.EmployeeName),
@@ -113,7 +109,7 @@ namespace RMS_Dao
         public static int checkLogin(string name, string password)
         {
             int rst = 0;
-            Employee employee = UserLogin_Dao.selectEmployeeByName(name);
+            Employee employee = Employee_Dao.selectEmployeeByName(name);
             if (employee == null)
             {
                 rst = -1;
