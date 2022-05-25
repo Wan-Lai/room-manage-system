@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 
 namespace RMS_Model
 {
@@ -34,7 +35,7 @@ namespace RMS_Model
         }
 
         // 客人电话号
-        public string GusetTal
+        public string GuestTel
         {
             set;
             get;

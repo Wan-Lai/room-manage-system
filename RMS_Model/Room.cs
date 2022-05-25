@@ -16,7 +16,7 @@ namespace RMS_Model
         }
 
         // 房间价格
-        public string RoomPrice
+        public double RoomPrice
         {
             set;
             get;

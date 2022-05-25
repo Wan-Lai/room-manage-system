@@ -3,7 +3,7 @@
 namespace RMS_Model
 {
     // 定义物品实体
-    public class Object
+    public class RObject
     {
         // 物品编号
         public int ObjectNo
