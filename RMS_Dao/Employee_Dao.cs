@@ -36,7 +36,7 @@ namespace RMS_Dao
         // 修改用户信息
         public static int modifyEmployee(int no, Employee employee)
         {
-            string sql = "UPDATE employee SET e_name=@name, e_password=@password, e_gender=@gender, e_age=@age, e_position=@position, e_phone=@phone, e_id=@id WHERE e_no=@no";
+            string sql = "UPDATE employee SET e_name=@name, e_password=@password, e_gender=@gender, e_age=@age, e_position=@position, e_tel=@tel, e_id=@id WHERE e_no=@no";
             SqlParameter[] sqlParameters = {
                 new SqlParameter("@name", employee.EmployeeName),
                 new SqlParameter("@password", employee.EmployeePassword),
@@ -53,7 +53,7 @@ namespace RMS_Dao
         // 通过名字查找用户
         public static Employee selectEmployeeByName(string name)
         {
-            string sql = "SLELCT * FROM employee WHERE e_name = @name";
+            string sql = "SELECT e_no, e_name, e_password, e_gender, e_age, e_position, e_tel, e_id FROM employee WHERE e_name = @name";
             SqlParameter sqlParameter = new SqlParameter("@name", name);
             Employee employee = null;
             using (SqlDataReader sqlDataReader = SqlHelper.executeReader(sql, sqlParameter))
@@ -78,12 +78,11 @@ namespace RMS_Dao
         // 查询所有员工
         public static List<Employee> selectAllEmployee()
         {
-            string sql = "SLELCT * FROM employee";
+            string sql = "SELECT e_no, e_name, e_password, e_gender, e_age, e_position, e_tel, e_id FROM employee";
             SqlParameter sqlParameter = new SqlParameter();
-            List<Employee> employees = null;
-            using (SqlDataReader sqlDataReader = SqlHelper.executeReader(sql, sqlParameter))
+            List<Employee> employees = new List<Employee>(); ;
+            using (SqlDataReader sqlDataReader = SqlHelper.executeReader(sql, null))
             {
-                employees = new List<Employee>();
                 while (sqlDataReader.Read())
                 {
                     Employee employee = new Employee();

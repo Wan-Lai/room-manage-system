@@ -42,7 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Employee_Dao.cs" />
+    <Compile Include="Guest_Dao.cs" />
+    <Compile Include="Object_Dao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Room_Dao.cs" />
     <Compile Include="SqlHelper.cs" />
   </ItemGroup>
   <ItemGroup>
