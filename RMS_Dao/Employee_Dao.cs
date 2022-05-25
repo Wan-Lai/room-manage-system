@@ -34,7 +34,7 @@ namespace RMS_Dao
         }
 
         // 修改用户信息
-        public static int modifyEmployee(Employee employee)
+        public static int modifyEmployee(int no, Employee employee)
         {
             string sql = "UPDATE employee SET e_name=@name, e_password=@password, e_gender=@gender, e_age=@age, e_position=@position, e_phone=@phone, e_id=@id WHERE e_no=@no";
             SqlParameter[] sqlParameters = {
@@ -45,7 +45,7 @@ namespace RMS_Dao
                 new SqlParameter("@position", employee.EmployeePosition),
                 new SqlParameter("@tel", employee.EmployeeTel),
                 new SqlParameter("@id", employee.EmployeeId),
-                new SqlParameter("@no", employee.EmployeeNo)
+                new SqlParameter("@no", no)
             };
             return SqlHelper.executeNonQuery(sql, sqlParameters);
         }
