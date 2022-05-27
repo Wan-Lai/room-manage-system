@@ -66,7 +66,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\index.css" />
     <Content Include="css\login.css" />
+    <Content Include="img\image1.jpg" />
     <Content Include="index.html" />
     <Content Include="login.html" />
     <Content Include="packages.config" />
