@@ -1,132 +1,98 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title></title>
-    <meta charset="utf-8" />
-    <style>
-        * {
-            padding: 0;
-            margin: 0;
-            transition: all .5s;
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>登录界面</title>
+	<meta charset="utf-8" />
+    <link type="text/css" rel="stylesheet" href="css/login.css" /> 
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        // 原生Js中的Ajax
+        /*window.onload = function () {
+            var btn_login = document.getElementById("btn_login");
+            btn_login.onclick = function () {
+                var ipt_username = document.getElementById("username");
+                var ipt_password = document.getElementById("password");
+                var request_url = "/EployeeLogin.ashx/username=" + ipt_username.value + "&password=" + ipt_password.value;
+                alert(request_url);
+                myAjax("get", request_url, function (data) {
+                    alert(data);
+                });
+                
+            }
         }
 
-        /*******************************头部开始*******************************/
-        .header {
-            height: 80px;
-            width: 100%;
-            /*background-color: red;*/
-        }
-        /*******************************头部结束*******************************/
+        function myAjax(httpMethod, url, callback) {
+            var xhr;
+            if (XMLHttpRequest) {
+                xhr = new XMLHttpRequest();
+            }
+            else {
+                xhr = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            //提交到后台地址，是否异步
+            xhr.open(httpMethod, url, true);
+            xhr.send();
+            //发送请求后，监控页面状态
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    callback(xhr.responseText);
+                }
+            }
+        }*/
 
-
-        /*******************************身体开始*******************************/
-        .main {
-            height: 500px;
-            width: 100%;
-            margin: 0;
-            padding-top: 20px;
-            /*background-color: green;*/
-        }
-
-
-        .loginform {
-            height: 250px;
-            width: 350px;
-            margin: 0 auto;
-            display: flow-root;
-            border-radius: 20px;
-            background-color: black;
-        }
-
-        .loginform:hover {
-            transform:scale(1.2);
-        }
-
-        .logininput {
-            height: 50px;
-            width: 300px;
-            margin: 23px auto;
-            text-align: center;
-            color: white;
-            border: 1px solid white;
-            border-radius: 10px;
-            background-color: black;
-        }
-
-        .logininput:hover .logininput: not-child(3) {
-            background-color: white;
-        }
-
-        .logininput > label {
-            font-size: 20px;
-            line-height: 50px;
-            margin-left: 15px;
-        }
-
-        .logininput > input[lang="input"] {
-            display: none;
-        }
-
-        .logininput:hover label {
-            display: none;
-        }
-
-        .logininput:hover input[lang="input"] {
-            height: 100%;
-            width: 100%;
-            text-align: center;
-            font-size: 20px;
-            border: 0;
-            border-radius: 10px;
-            display: block;
-        }
-
-        .loginform > .logininput > input[lang="button"] {
-            height: 100%;
-            width: 49%;
-            color: white;
-            background-color: black;
-            font-size: 20px;
-            border: 0;
-            border-radius: 10px;
-        }
-
-        .loginform > .logininput:hover input[lang="button"] {
-            color: black;
-            background-color: white;
-        }
-
-        /*******************************身体结束*******************************/
-
-
-        /*******************************底部开始*******************************/
-        .footer {
-            height: 150px;
-            width: 100%;
-            /*background: blue;*/
-        }
-        /*******************************底部结束*******************************/
-    </style>
+        // Jquery中的Ajax
+        $(function () {
+            $("#btn_login").click(function () {
+                var txt_username = $("#username").val();
+                var txt_password = $("#password").val();
+                if (txt_username.trim()=="" || txt_password.trim() == "")
+                {
+                    alert("请将内容补充完整!");
+                } else {
+                    $.ajax({
+                        method: "post",
+                        url: "/EmployeeLogin.ashx/?username="+txt_username+"&password="+txt_password,
+                        success: function (result) {
+                            switch (result)
+                            {
+                                case "-1":
+                                    alert("账号不存在！是否前往注册?");
+                                    break;
+                                case "0":
+                                    alert("密码不正确！是否忘记密码?");
+                                    break;
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="continer">
         <div class="header">
         </div>
         <div class="main">
-            <form class="loginform" method="get" action="#">
+            <form class="loginform">
                 <div class="logininput">
                     <label>账号</label>
-                    <input type="text" lang="input" name="username" />
+                    <input type="text" id="username" list="user" lang="input"/>
+                    <datalist id="user" name="demo">
+                        <option>张三</option>
+                        <option>李四</option>
+                    </datalist>
                 </div>
                 <div class="logininput">
                     <label>密码</label>
-                    <input type="password" lang="input" name="password" />
+                    <input type="password" id="password" lang="input"/>
                 </div>
                 <div class="logininput">
-                    <input type="reset" lang="button" value="清空" />
-                    <input type="submit" lang="button" value="登录" />
+                    <input type="reset" lang="button" value="清空"/>
+                    <input type="button" lang="button" id="btn_login" value="登录"/>
                 </div>
+
             </form>
         </div>
         <div class="footer">
