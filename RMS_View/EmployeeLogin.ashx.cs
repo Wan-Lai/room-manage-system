@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using RMS_Dao;
+using RMS_Model;
 
 namespace RMS_View
 {
@@ -24,9 +25,12 @@ namespace RMS_View
                     context.Response.Write("0");
                     break;
                 case 1:
-                    context.Response.Write("<script>alert('登录成功');</script>");
-                    // context.Session["UserName"] = username;
-                    context.Response.Redirect("/Index.aspx");
+                    Employee employee = Employee_Dao.selectEmployeeByName(username);
+                    HttpCookie cookies = new HttpCookie("preEmployee");
+                    cookies["username"] = employee.EmployeeName;
+                    cookies["position"] = Convert.ToString(employee.EmployeePosition);
+                    context.Response.AppendCookie(cookies);
+                    context.Response.Write("1");
                     break;
             } 
         }

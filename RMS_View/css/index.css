@@ -70,6 +70,10 @@ color: purple;
     position: absolute;
 }
 
+.main > div.detail:hover {
+    opacity: 0.8;
+}
+
 .main > div.main-left {
     width: 20%;
     height: 100%;
@@ -113,8 +117,10 @@ color: purple;
     background-color: #FFF;
 }
 
+
+
  .main-right td , .main-right th {
-    width: 100%;
     margin: 20px;
+    padding:10px 20px;
     border:1px solid red;
 }

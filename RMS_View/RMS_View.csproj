@@ -73,6 +73,7 @@
     <Content Include="login.html" />
     <Content Include="packages.config" />
     <Content Include="EmployeeLogin.ashx" />
+    <Content Include="Login_success.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -87,6 +88,9 @@
   <ItemGroup>
     <Compile Include="EmployeeLogin.ashx.cs">
       <DependentUpon>EmployeeLogin.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="Login_success.ashx.cs">
+      <DependentUpon>Login_success.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
