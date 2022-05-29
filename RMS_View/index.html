@@ -10,57 +10,22 @@
             var employee_attrs = cookie_employee.split("&");
             console.log("employee_attrs:" + employee_attrs);
             var employee_username = employee_attrs[0];
-            var employee_position = employee_attrs[1];
+            employee_position = employee_attrs[1];
             var employee_username_length = employee_username.length;
             var employee_position_length = employee_position.length;
             employee_username = employee_username.substr(9, employee_username_length - 1);
             employee_position = employee_position.substr(9, employee_position_length - 1);
+            $.ajax({
+                method: "post",
+                url: "/GetInfo.ashx?model=guest&type=all",
+                success: function (result) {
+                    document.getElementById("data_table").innerHTML = result2guest(result);
+                }
+            });
             console.log("欢迎" + employee_username + "登录");
             console.log("position="+employee_position);
             document.getElementById("cookie_username").innerHTML = employee_username;
-            $.ajax({
-                method: "get",
-                url: "/Login_success.ashx",
-                success: function (result) {
-                    result = JSON.parse(result);
-                    var str = "";
-                    str += "<tr>";
-                    str += "<th>编号</th>";
-                    str += "<th>姓名</th>";
-                    str += "<th>密码</th>";
-                    str += "<th>性别</th>";
-                    str += "<th>年龄</th>";
-                    str += "<th>职位</th>";
-                    str += "<th>电话</th>";
-                    str += "<th>身份证号</th>";
-                    str += "</tr>";
-                    for (var i = 0; i < result.length; i++) {
-                        var emp = result[i];
-                        var no = emp.EmployeeNo;
-                        var name = emp.EmployeeName;
-                        var password = emp.EmployeePassword;
-                        var gender = emp.EmployeeGender;
-                        var age = emp.EmployeeAge;
-                        var position = emp.EmployeePosition;
-                        var tel = emp.EmployeeTel;
-                        var id = emp.EmployeeId;
-                        if (result[i].EmployeePosition <= employee_position) {
-                            str += "<tr>";
-                            str += "<td>" + no + "</td>";
-                            str += "<td>" + name + "</td>";
-                            str += "<td>" + password + "</td>";
-                            str += "<td>" + gender + "</td>";
-                            str += "<td>" + age + "</td>";
-                            str += "<td>" + position + "</td>";
-                            str += "<td>" + tel + "</td>";
-                            str += "<td>" + id + "</td>";
-                            str += "</tr>";
-                        }
-                        // console.log(str);
-                    }
-                    document.getElementById("data_table").innerHTML = str;
-                }
-            });
+           
         }
 
 		function ocDetail(detail) {
@@ -80,6 +45,197 @@
 			}
 		}
 
+		function result2employee(result, employee_position) {
+		    var POSITIONS = ["保洁员", "前台", "服务员", "经理"];
+		    result = JSON.parse(result);
+		    console.log(result);
+		    var str = "";
+		    str += "<tr>";
+		    str += "<td colspan=3></td>";
+		    str += "<td colspan=3></td>";
+		    str += "<td colspan=2><input type='text' placeholder='请输入姓名' id='searchname'/><input type='button' value='搜索' onclick='searchByName()'/></td>";
+		    str += "</tr>";
+		    str += "<tr>";
+		    str += "<th onclick='changeOrder(this,'employee')'>编号</th>";
+		    str += "<th>姓名</th>";
+		    str += "<th>密码</th>";
+		    str += "<th>性别</th>";
+		    str += "<th>年龄</th>";
+		    str += "<th>职位</th>";
+		    str += "<th>电话</th>";
+		    str += "<th>身份证号</th>";
+		    str += "</tr>";
+		    if (result.length) {
+		        for (var i = 0; i < result.length; i++) {
+		            var emp = result[i];
+		            var no = emp.EmployeeNo;
+		            var name = emp.EmployeeName;
+		            var password = emp.EmployeePassword;
+		            var gender = emp.EmployeeGender;
+		            var age = emp.EmployeeAge;
+		            var position = emp.EmployeePosition;
+		            var tel = emp.EmployeeTel;
+		            var id = emp.EmployeeId;
+		            if (result[i].EmployeePosition <= employee_position) {
+		                str += "<tr>";
+		                str += "<td>" + no + "</td>";
+		                str += "<td>" + name + "</td>";
+		                str += "<td>" + password + "</td>";
+		                str += "<td>" + gender + "</td>";
+		                str += "<td>" + age + "</td>";
+		                str += "<td>" + POSITIONS[position] + "</td>";
+		                str += "<td>" + tel + "</td>";
+		                str += "<td>" + id + "</td>";
+		                str += "</tr>";
+		            }
+		        }
+		    } else {
+		        if (result.EmployeePosition <= employee_position) {
+		            str += "<tr>";
+		            str += "<td>" + result.EmployeeNo + "</td>";
+		            str += "<td>" + result.EmployeeName + "</td>";
+		            str += "<td>" + result.EmployeePassword + "</td>";
+		            str += "<td>" + result.EmployeeGender + "</td>";
+		            str += "<td>" + result.EmployeeAge + "</td>";
+		            str += "<td>" + POSITIONS[result.EmployeePosition] + "</td>";
+		            str += "<td>" + result.EmployeeTel + "</td>";
+		            str += "<td>" + result.EmployeeId + "</td>";
+		            str += "</tr>";
+		        } else {
+		            alert("权限不足，无法查看。");
+		        }
+		    }
+		    str += "<tr>";
+		    str += "<td colspan=2></td>";
+		    str += "<td colspan=4>哈哈哈</td>";
+		    str += "<td colspan=2></td>";
+		    str += "</tr>";
+		    return str;
+		}
+
+        // 返回值转guest字符串
+		function result2guest(result) {
+		    result = JSON.parse(result);
+		    console.log(result);
+		    var str = "";
+		    str += "<tr>";
+		    str += "<td colspan=2></td>";
+		    str += "<td colspan=2></td>";
+		    str += "<td colspan=2><input type='text' placeholder='请输入姓名' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"guest\")'/></td>";
+		    str += "</tr>";
+		    str += "<tr>";
+		    str += "<th onclick='changeOrder(this, 'guest')'>编号</th>";
+		    str += "<th>姓名</th>";
+		    str += "<th>性别</th>";
+		    str += "<th>年龄</th>";
+		    str += "<th>电话</th>";
+		    str += "<th>身份证号</th>";
+		    str += "</tr>";
+		    if (result.length) {
+		        for (var i = 0; i < result.length; i++) {
+		            var gue = result[i];
+		            var no = gue.GuestNo;
+		            var name = gue.GuestName;
+		            var gender = gue.GuestGender;
+		            var age = gue.GuestAge;
+		            var tel = gue.GuestTel;
+		            var id = gue.GuestId;
+		            str += "<tr>";
+		            str += "<td>" + no + "</td>";
+		            str += "<td>" + name + "</td>";
+		            str += "<td>" + gender + "</td>";
+		            str += "<td>" + age + "</td>";
+		            str += "<td>" + tel + "</td>";
+		            str += "<td>" + id + "</td>";
+		            str += "</tr>";
+		        }
+		    } else {
+		        str += "<tr>";
+		        str += "<td>" + result.GuestNo + "</td>";
+		        str += "<td>" + result.GuestName + "</td>";
+		        str += "<td>" + result.GuestGender + "</td>";
+		        str += "<td>" + result.GuestAge + "</td>";
+		        str += "<td>" + result.GuestTel + "</td>";
+		        str += "<td>" + result.GuestId + "</td>";
+		        str += "</tr>";
+		    }
+		    str += "<tr>";
+		    str += "<td colspan=2></td>";
+		    str += "<td colspan=2>哈哈哈</td>";
+		    str += "<td colspan=2></td>";
+		    str += "</tr>";
+		    return str;
+		}
+
+		function changeOrder(ispan, model) {
+		    var flag = 1;
+		    switch (model) {
+                case "employee":
+		            switch (flag) {
+		                case 1:
+		                    myAjax("model=employee&type=order", "employee");
+		                    flag = 2;
+		                    break;
+		                case 2:
+		                    myAjax("model=employee&type=iorder", "employee");
+		                    flag = 3;
+		                    break;
+		                case 3:
+		                    myAjax("model=employee&type=all", "employee");
+		                    flag = 1;
+		                    break;
+		            }
+		            break;
+		        case "guest":
+		            switch (flag) {
+		                case 1:
+		                    myAjax("model=guest&type=order", "guest");
+		                    flag = 2;
+		                    break;
+		                case 2:
+		                    myAjax("model=guest&type=iorder", "guest");
+		                    flag = 3;
+		                    break;
+		                case 3:
+		                    myAjax("model=guest&type=all", "guest");
+		                    flag = 1;
+		                    break;
+		            }
+		            break;
+		            break;
+		    }
+		}
+
+		function myAjax(url, model) {
+		    var show_table = document.getElementById("data_table");
+		    $.ajax({
+		        method: "post",
+		        url: "/GetInfo.ashx?" + url,
+		        success: function (result) {
+		            switch (model) {
+		                case "employee":
+		                    show_table.innerHTML = result2employee(result, employee_position);
+		                    break;
+		                case "guest":
+		                    show_table.innerHTML = result2guest(result);
+		                    break;
+		            }
+		            console.log(result);
+		        }
+		    });
+		}
+		function searchByName(model) {
+		    switch (model) {
+		        case "employee":
+		            var req_name = document.getElementById("searchname").value;
+		            myAjax('model=employee&name=' + req_name, "employee");
+		            break;
+		        case "guest":
+		            var req_name = document.getElementById("searchname").value;
+		            myAjax('model=guest&name=' + req_name, "guest");
+		            break;
+		    }
+		}
     </script>
 </head>
 <body>
