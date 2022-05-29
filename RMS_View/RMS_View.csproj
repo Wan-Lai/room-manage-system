@@ -74,6 +74,7 @@
     <Content Include="packages.config" />
     <Content Include="EmployeeLogin.ashx" />
     <Content Include="GetInfo.ashx" />
+    <Content Include="Reginster_Employee.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -93,6 +94,9 @@
       <DependentUpon>GetInfo.ashx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reginster_Employee.ashx.cs">
+      <DependentUpon>Reginster_Employee.ashx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RMS_Dao\RMS_Dao.csproj">

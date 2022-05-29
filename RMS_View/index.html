@@ -2,8 +2,166 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/index.css"/>
     <script src="js/jquery-2.1.1.min.js"></script>
+    <style>
+        * {
+    padding: 0;
+    margin: 0;
+    transition: all .3s;
+}
+
+body {
+    border: 10px solid #FFF;
+    border-radius: 20px;
+    background-color: #FFF;
+}
+
+body:hover {
+    border: 10px solid #EEE;
+    transform: scale(0.95);
+    box-shadow: 0 0 5px black;
+    background-color: #EEE;
+}
+
+.header {
+    height: 100px;
+    width: 100%;
+}
+
+.header > div.border {
+    height: 90px;
+    width: 100%;
+    border-radius: 10px 10px 0 0;
+    border-bottom: 10px solid #EEE;
+    background-image: url("../img/image1.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+div.border > label:first-child {
+    font-size: 20px;
+    display: block;
+    padding-top: 20px;
+    margin-left: 3%;
+}
+
+div.border > label:nth-child(2) {
+font-size: 13px;
+margin-left: 3%;
+}
+
+div.border > label > b {
+color: purple;
+}
+
+
+.main {
+    width: 100%;
+    height: 400px;
+    background-color:#FFF;
+    both: clean;
+}
+
+.main > div.detail {
+    height: 70px;
+    width: 20px;
+    left: 20%;
+    top: 43%;
+    border: 3px solid #EEE;
+    border-left: 0;
+    border-radius: 0 10px 10px 0;
+    line-height: 70px;
+    background-color: #FFF;
+    position: absolute;
+}
+
+.main > div.detail:hover {
+    opacity: 0.8;
+}
+
+.main > div.main-left {
+    width: 20%;
+    height: 100%;
+    border-right: 3px solid #EEE;
+    background-color: #FFF;
+    float: left;
+}
+
+.main-left > ul > li {
+    height: 50px;
+    width: 100%;
+    font-size: 20px;
+    line-height: 50px;
+    list-style: none;
+}
+
+.main-left > ul > li.list-1 {
+    box-sizing: border-box;
+    border-bottom: 2px solid grey;
+    display: flex;
+    justify-content: space-between;
+}
+
+.main-left > ul > li.list-2 {
+    border-bottom: 1px solid grey;
+    padding-left: 40px;
+}
+
+.main-left > ul > li.list-1 label {
+    margin-left: 10px;
+}
+
+.main-left > ul > li.list-1:after {
+    content: ">";
+}
+
+.main-right {
+    width: 79%;
+    height: 100%;
+    float: left;
+    background-color: #FFF;
+}
+
+.main-right table {
+    width:500px;
+    height:300px;
+}
+
+.dialog-reginster-employee{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.4);
+    position: absolute;
+    top:0;
+    left:0;
+    text-align: center;
+}
+
+.dialog-reginster-employee form {
+    height:300px;
+    width: 300px;
+    margin: 100px auto;
+    border-radius: 30px;
+    color:white;
+    background-color:black;
+
+}
+
+
+
+ .main-right td , .main-right th {
+    margin: 20px;
+    padding:10px 20px;
+    border:1px solid red;
+}
+
+
+    </style>
     <script>
         var employee_position = 0;
+        var EMPLOYEE_POSITIONS = ["保洁员", "前台", "服务员", "经理"];
+        var ROOM_STATUS = ["空闲", "已住人", "预约", "维修" ];
+        var ROOM_TYPES = ["单人房", "标准房", "豪华房", "商务房" ];
         window.onload = function () {
             var cookies = document.cookie;
             var cookie_employee = document.cookie.split("preEmployee=")[1];
@@ -15,16 +173,10 @@
             var employee_position_length = employee_position.length;
             employee_username = employee_username.substr(9, employee_username_length - 1);
             employee_position = employee_position.substr(9, employee_position_length - 1);
-            $.ajax({
-                method: "post",
-                url: "/GetInfo.ashx?model=guest&type=all",
-                success: function (result) {
-                    document.getElementById("data_table").innerHTML = result2guest(result);
-                }
-            });
-            console.log("欢迎" + employee_username + "登录");
+            console.log("欢迎" + EMPLOYEE_POSITIONS[employee_position] + ":" + employee_username + "登录");
             console.log("position="+employee_position);
-            document.getElementById("cookie_username").innerHTML = employee_username;
+            document.getElementById("cookie_username").innerHTML = EMPLOYEE_POSITIONS[employee_position] + ":" +employee_username;
+            myAjax("model=employee&type=page&page=1", "employee");
            
         }
 
@@ -46,17 +198,19 @@
 		}
 
 		function result2employee(result, employee_position) {
-		    var POSITIONS = ["保洁员", "前台", "服务员", "经理"];
 		    result = JSON.parse(result);
 		    console.log(result);
+		    var count = 0;
 		    var str = "";
 		    str += "<tr>";
-		    str += "<td colspan=3></td>";
-		    str += "<td colspan=3></td>";
-		    str += "<td colspan=2><input type='text' placeholder='请输入姓名' id='searchname'/><input type='button' value='搜索' onclick='searchByName()'/></td>";
+		    str += "<td></td>";
+		    str += "<td colspan=2><input type='button' onclick='javascript:document.getElementsByClassName(\"dialog-reginster-employee\")[0].style.display=\"block\"' value='添加'/></td>";
+		    str += "<td colspan=2><input type='button' value='删除'/></td>";
+		    str += "<td colspan=5><input type='text' placeholder='请输入姓名' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"employee\")'/></td>";
 		    str += "</tr>";
 		    str += "<tr>";
-		    str += "<th onclick='changeOrder(this,'employee')'>编号</th>";
+		    str += "<th><input type='checkbox' name='checkname' id='fcheckbox' onclick='checkAll(this)'/></th>";
+		    str += "<th onclick='changeOrder(this,\"employee\")'>编号</th>";
 		    str += "<th>姓名</th>";
 		    str += "<th>密码</th>";
 		    str += "<th>性别</th>";
@@ -64,106 +218,243 @@
 		    str += "<th>职位</th>";
 		    str += "<th>电话</th>";
 		    str += "<th>身份证号</th>";
+		    str += "<th>操作</th>";
 		    str += "</tr>";
-		    if (result.length) {
-		        for (var i = 0; i < result.length; i++) {
-		            var emp = result[i];
-		            var no = emp.EmployeeNo;
-		            var name = emp.EmployeeName;
-		            var password = emp.EmployeePassword;
-		            var gender = emp.EmployeeGender;
-		            var age = emp.EmployeeAge;
-		            var position = emp.EmployeePosition;
-		            var tel = emp.EmployeeTel;
-		            var id = emp.EmployeeId;
-		            if (result[i].EmployeePosition <= employee_position) {
+		    if (result != null) {
+		        if (result.length) {
+		            for (var i = 0; i < result.length; i++) {
+		                var emp = result[i];
+		                var no = emp.EmployeeNo;
+		                var name = emp.EmployeeName;
+		                var password = emp.EmployeePassword;
+		                var gender = emp.EmployeeGender;
+		                var age = emp.EmployeeAge;
+		                var position = emp.EmployeePosition;
+		                var tel = emp.EmployeeTel;
+		                var id = emp.EmployeeId;
+		                if (result[i].EmployeePosition <= employee_position) {
+		                    str += "<tr>";
+		                    str += "<td><input type='checkbox' name='checkname' class='scheckbox' lang='" + no + "'/></td>"
+		                    str += "<td>" + no + "</td>";
+		                    str += "<td>" + name + "</td>";
+		                    str += "<td>" + password + "</td>";
+		                    str += "<td>" + gender + "</td>";
+		                    str += "<td>" + age + "</td>";
+		                    str += "<td>" + EMPLOYEE_POSITIONS[position] + "</td>";
+		                    str += "<td>" + tel + "</td>";
+		                    str += "<td>" + id + "</td>";
+		                    str += "<td><input type='button' value='删除' onclick='deleteEmployee(" + no + ")'/><input type='button' value='修改' onclick='modifyEmployee(" + no + ")'/></td>";
+		                    str += "</tr>";
+		                    count++;
+		                }
+		            }
+		        } else {
+		            if (result.EmployeePosition <= employee_position) {
 		                str += "<tr>";
-		                str += "<td>" + no + "</td>";
-		                str += "<td>" + name + "</td>";
-		                str += "<td>" + password + "</td>";
-		                str += "<td>" + gender + "</td>";
-		                str += "<td>" + age + "</td>";
-		                str += "<td>" + POSITIONS[position] + "</td>";
-		                str += "<td>" + tel + "</td>";
-		                str += "<td>" + id + "</td>";
+		                str += "<td><input type='checkbox' name='checkname'/></td>";
+		                str += "<td>" + result.EmployeeNo + "</td>";
+		                str += "<td>" + result.EmployeeName + "</td>";
+		                str += "<td>" + result.EmployeePassword + "</td>";
+		                str += "<td>" + result.EmployeeGender + "</td>";
+		                str += "<td>" + result.EmployeeAge + "</td>";
+		                str += "<td>" + EMPLOYEE_POSITIONS[result.EmployeePosition] + "</td>";
+		                str += "<td>" + result.EmployeeTel + "</td>";
+		                str += "<td>" + result.EmployeeId + "</td>";
 		                str += "</tr>";
+		            } else {
+		                alert("权限不足，无法查看。");
 		            }
 		        }
-		    } else {
-		        if (result.EmployeePosition <= employee_position) {
-		            str += "<tr>";
-		            str += "<td>" + result.EmployeeNo + "</td>";
-		            str += "<td>" + result.EmployeeName + "</td>";
-		            str += "<td>" + result.EmployeePassword + "</td>";
-		            str += "<td>" + result.EmployeeGender + "</td>";
-		            str += "<td>" + result.EmployeeAge + "</td>";
-		            str += "<td>" + POSITIONS[result.EmployeePosition] + "</td>";
-		            str += "<td>" + result.EmployeeTel + "</td>";
-		            str += "<td>" + result.EmployeeId + "</td>";
-		            str += "</tr>";
-		        } else {
-		            alert("权限不足，无法查看。");
+		        str += "<tr>";
+		        str += "<td colspan=2></td>";
+		        str += "<td colspan=5>";
+		        for (var i = 0; i < count / 5; i++)
+		        {
+		            str += "<span style='border:1px solid red;'>" + (i+1) + "</span>";
 		        }
+		        str += "</td>";
+		        str += "<td colspan=3></td>";
+		        str += "</tr>";
 		    }
-		    str += "<tr>";
-		    str += "<td colspan=2></td>";
-		    str += "<td colspan=4>哈哈哈</td>";
-		    str += "<td colspan=2></td>";
-		    str += "</tr>";
 		    return str;
 		}
 
         // 返回值转guest字符串
 		function result2guest(result) {
+		    var count = 0;
 		    result = JSON.parse(result);
 		    console.log(result);
 		    var str = "";
 		    str += "<tr>";
 		    str += "<td colspan=2></td>";
 		    str += "<td colspan=2></td>";
-		    str += "<td colspan=2><input type='text' placeholder='请输入姓名' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"guest\")'/></td>";
+		    str += "<td colspan=3><input type='text' placeholder='请输入姓名' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"guest\")'/></td>";
 		    str += "</tr>";
 		    str += "<tr>";
-		    str += "<th onclick='changeOrder(this, 'guest')'>编号</th>";
+		    str += "<th><input type='checkbox' name='checkname'/></th>";
+		    str += "<th onclick='changeOrder(this, \"guest\")'>编号</th>";
 		    str += "<th>姓名</th>";
 		    str += "<th>性别</th>";
 		    str += "<th>年龄</th>";
 		    str += "<th>电话</th>";
 		    str += "<th>身份证号</th>";
 		    str += "</tr>";
-		    if (result.length) {
-		        for (var i = 0; i < result.length; i++) {
-		            var gue = result[i];
-		            var no = gue.GuestNo;
-		            var name = gue.GuestName;
-		            var gender = gue.GuestGender;
-		            var age = gue.GuestAge;
-		            var tel = gue.GuestTel;
-		            var id = gue.GuestId;
+		    if (result != null) {
+		        if (result.length) {
+		            for (var i = 0; i < result.length; i++) {
+		                var gue = result[i];
+		                var no = gue.GuestNo;
+		                var name = gue.GuestName;
+		                var gender = gue.GuestGender;
+		                var age = gue.GuestAge;
+		                var tel = gue.GuestTel;
+		                var id = gue.GuestId;
+		                str += "<tr>";
+		                str += "<td><input type='checkbox' name='checkname'/></td>"
+		                str += "<td>" + no + "</td>";
+		                str += "<td>" + name + "</td>";
+		                str += "<td>" + gender + "</td>";
+		                str += "<td>" + age + "</td>";
+		                str += "<td>" + tel + "</td>";
+		                str += "<td>" + id + "</td>";
+		                str += "</tr>";
+		                count++;
+		            }
+		        } else {
 		            str += "<tr>";
-		            str += "<td>" + no + "</td>";
-		            str += "<td>" + name + "</td>";
-		            str += "<td>" + gender + "</td>";
-		            str += "<td>" + age + "</td>";
-		            str += "<td>" + tel + "</td>";
-		            str += "<td>" + id + "</td>";
+		            str += "<td>" + result.GuestNo + "</td>";
+		            str += "<td>" + result.GuestName + "</td>";
+		            str += "<td>" + result.GuestGender + "</td>";
+		            str += "<td>" + result.GuestAge + "</td>";
+		            str += "<td>" + result.GuestTel + "</td>";
+		            str += "<td>" + result.GuestId + "</td>";
 		            str += "</tr>";
 		        }
-		    } else {
 		        str += "<tr>";
-		        str += "<td>" + result.GuestNo + "</td>";
-		        str += "<td>" + result.GuestName + "</td>";
-		        str += "<td>" + result.GuestGender + "</td>";
-		        str += "<td>" + result.GuestAge + "</td>";
-		        str += "<td>" + result.GuestTel + "</td>";
-		        str += "<td>" + result.GuestId + "</td>";
+		        str += "<td colspan=2></td>";
+		        str += "<td colspan=3>";
+		        for (var i = 0; i < count / 5; i++) {
+		            str += "<span style='border:1px solid red;'>" + i + "</span>";
+		        }
+		        str += "</td>";
+		        str += "<td colspan=2></td>";
 		        str += "</tr>";
 		    }
+		    return str;
+		}
+
+		// 返回值转room字符串
+		function result2room(result) {
+		    var count = 0;
+		    result = JSON.parse(result);
+		    console.log(result);
+		    var str = "";
 		    str += "<tr>";
-		    str += "<td colspan=2></td>";
-		    str += "<td colspan=2>哈哈哈</td>";
-		    str += "<td colspan=2></td>";
+		    str += "<td colspan=1></td>";
+		    str += "<td colspan=1></td>";
+		    str += "<td colspan=3><input type='text' placeholder='请输入房号' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"room\")'/></td>";
 		    str += "</tr>";
+		    str += "<tr>";
+		    str += "<td><input type='checkbox' name='checkname'/></td>"
+		    str += "<th onclick='changeOrder(this, \"room\")'>编号</th>";
+		    str += "<th>价格</th>";
+		    str += "<th>状态</th>";
+		    str += "<th>类型</th>";
+		    str += "</tr>";
+		    if (result != null) {
+		        if (result.length) {
+		            for (var i = 0; i < result.length; i++) {
+		                var room = result[i];
+		                var no = room.RoomNo;
+		                var price = room.RoomPrice;
+		                var state = room.RoomStatu;
+		                var type = room.RoomType;
+		                str += "<tr>";
+		                str += "<td><input type='checkbox' name='checkname'/></td>"
+		                str += "<td>" + no + "</td>";
+		                str += "<td>" + price + "</td>";
+		                str += "<td>" + ROOM_STATUS[state] + "</td>";
+		                str += "<td>" + ROOM_TYPES[type] + "</td>";
+		                str += "</tr>";
+		                count++;
+		            }
+		        } else {
+		            str += "<tr>";
+		            str += "<td><input type='checkbox' name='checkname'/></td>"
+		            str += "<td>" + result.RoomNo + "</td>";
+		            str += "<td>" + result.RoomPrice + "</td>";
+		            str += "<td>" + ROOM_STATUS[result.RoomStatu] + "</td>";
+		            str += "<td>" + ROOM_TYPES[result.RoomType] + "</td>";
+		            str += "</tr>";
+		        }
+		    } 
+		    str += "<tr>";
+		    str += "<td colspan=1></td>";
+		    str += "<td colspan=3>";
+		    for (var i = 0; i < count / 5; i++) {
+		        str += "<span style='border:1px solid red;'>" + i + "</span>";
+		    }
+		    str += "</td>";
+		    str += "<td colspan=1></td>";
+		    str += "</tr>";
+		    return str;
+		}
+
+		// 返回值转object字符串
+		function result2object(result) {
+		    var count  = 0;
+		    result = JSON.parse(result);
+		    console.log(result);
+		    var str = "";
+		    str += "<tr>";
+		    str += "<td colspan=1></td>";
+		    str += "<td colspan=1></td>";
+		    str += "<td colspan=3><input type='text' placeholder='请输入物品名称' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"room\")'/></td>";
+		    str += "</tr>";
+		    str += "<tr>";
+		    str += "<td><input type='checkbox' name='checkname'/></td>"
+		    str += "<th onclick='changeOrder(this, \"object\")'>编号</th>";
+		    str += "<th>名称</th>";
+		    str += "<th>数量</th>";
+		    str += "<th>价格</th>";
+		    str += "</tr>";
+		    if (result != null) {
+		        if (result.length) {
+		            for (var i = 0; i < result.length; i++) {
+		                // 编号 姓名 数量 价格
+		                var object = result[i];
+		                var no = object.ObjectNo;
+		                var name = object.ObjectName;
+		                var number = object.ObjectNumber;
+		                var price = object.ObjectPrice;
+		                str += "<tr>";
+		                str += "<td><input type='checkbox' name='checkname'/></td>"
+		                str += "<td>" + no + "</td>";
+		                str += "<td>" + name + "</td>";
+		                str += "<td>" + number + "</td>";
+		                str += "<td>" + price + "</td>";
+		                str += "</tr>";
+		                count++;
+		            }
+		        } else {
+		            str += "<tr>";
+		            str += "<td><input type='checkbox' name='checkname'/></td>"
+		            str += "<td>" + result.ObjectNo + "</td>";
+		            str += "<td>" + result.ObjectName + "</td>";
+		            str += "<td>" + result.ObjectNumber + "</td>";
+		            str += "<td>" + result.ObjectPrice + "</td>";
+		            str += "</tr>";
+		        }
+		        str += "<tr>";
+		        str += "<td colspan=1></td>";
+		        str += "<td colspan=3>";
+		        for (var i = 0; i < count / 5; i++) {
+		            str += "<span style='border:1px solid red;'>" + i + "</span>";
+		        }
+		        str += "</td>";
+		        str += "<td colspan=1></td>";
+		        str += "</tr>";
+		    }
 		    return str;
 		}
 
@@ -202,6 +493,37 @@
 		                    break;
 		            }
 		            break;
+		        case "room":
+		            switch (flag) {
+		                case 1:
+		                    myAjax("model=room&type=order", "room");
+		                    flag = 2;
+		                    break;
+		                case 2:
+		                    myAjax("model=room&type=iorder", "room");
+		                    flag = 3;
+		                    break;
+		                case 3:
+		                    myAjax("model=room&type=all", "room");
+		                    flag = 1;
+		                    break;
+		            }
+		            break;
+		        case "object":
+		            switch (flag) {
+		                case 1:
+		                    myAjax("model=object&type=order", "object");
+		                    flag = 2;
+		                    break;
+		                case 2:
+		                    myAjax("model=object&type=iorder", "object");
+		                    flag = 3;
+		                    break;
+		                case 3:
+		                    myAjax("model=object&type=all", "object");
+		                    flag = 1;
+		                    break;
+		            }
 		            break;
 		    }
 		}
@@ -219,6 +541,16 @@
 		                case "guest":
 		                    show_table.innerHTML = result2guest(result);
 		                    break;
+		                case "room":
+		                    show_table.innerHTML = result2room(result);
+		                    break;
+		                case "object":
+		                    show_table.innerHTML = result2object(result);
+		                    break;
+		                case "deleteemployee":
+		                    alert("删除成功");
+		                    myAjax("model=employee&type=page&page=1", "employee");
+		                    break;
 		            }
 		            console.log(result);
 		        }
@@ -234,8 +566,63 @@
 		            var req_name = document.getElementById("searchname").value;
 		            myAjax('model=guest&name=' + req_name, "guest");
 		            break;
+		        case "room":
+		            var req_name = document.getElementById("searchname").value;
+		            myAjax('model=room&name=' + req_name, "room");
+		            break;
+		        case "object":
+		            var req_name = document.getElementById("searchname").value;
+		            myAjax('model=object&name=' + req_name , "object");
+		            break;
 		    }
 		}
+
+		function changeEmployee() {
+		    myAjax("model=employee&type=all", "employee");
+		}
+
+		function changeGuest() {
+		    myAjax("model=guest&type=all", "guest");
+		}
+
+		function changeRoom() {
+		    myAjax("model=room&type=all", "room");
+		}
+
+		function changeObject() {
+		    myAjax("model=object&type=all", "object");
+		}
+
+		function insertEmployee() {
+		    var show_table = document.getElementById("data_table");
+		    var precode = show_table.innerHTML;
+		    console.log(""+precode);
+		}
+        
+		function checkAll(box) {
+		    if (box.checked) {
+		        $(".scheckbox").attr("checked", true);
+		        var scheckbox = document.getElementsByClassName("scheckbox");
+		        var check_box = "{";
+		        for (var i = 0; i < scheckbox.length - 1; i++) {
+		            var mbox = scheckbox[i];
+		            check_box += mbox.getAttribute("lang");
+		            check_box += ",";
+		        }
+		        check_box += scheckbox[scheckbox.length - 1].getAttribute("lang");
+		        check_box += "}";
+                console.log(check_box);
+
+		    } else {
+		        $(".scheckbox").attr("checked", false);
+		    }
+		}
+        
+		function deleteEmployee(no) {
+		    myAjax("model=employee&type=delete&no=" + no, "deleteemployee");
+		}
+
+
     </script>
 </head>
 <body>
@@ -253,16 +640,17 @@
         <div class="main-left">
             <ul>
                 <li class="list-1">
-                    <label>员工管理</label>
+                    <label onclick="changeEmployee()">员工管理</label>
                 </li>
-                <li class="list-2"><label>11111</label></li>
                 <li class="list-1">
-                    <label>
-                        客人管理
-                    </label>
+                    <label onclick="changeGuest()">客人管理</label>
                 </li>
-                <li class="list-1"><label>房间管理</label></li>
-                <li class="list-1"><label>物品管理</label></li>
+                <li class="list-1">
+                    <label onclick="changeRoom()">房间管理</label>
+                </li>
+                <li class="list-1">
+                    <label onclick="changeObject()">物品管理</label>
+                </li>
             </ul>
         </div>
         <div class="main-right">
@@ -271,6 +659,28 @@
         </div>
     </div>
     <div class="footer">
+    </div>
+    <div class="dialog-reginster-employee" style="display:none">
+        <form mothod="get" action="/Reginster_Employee.ashx" id="dialog-login">
+            <div style="height:20px;width:20px;color:white;margin-top:15px;margin-left:10px;" onclick='javascript:document.getElementsByClassName("dialog-reginster-employee")[0].style.display="none"'>x</div>
+            编&emsp;&emsp;号:<input type="text" name="no" /><br />
+            姓&emsp;&emsp;名:<input type="text" name="username" /><br />
+            密&emsp;&emsp;码:<input type="password" name="password" /><br />
+            性&emsp;&emsp;别:<input type="radio" name="gender" value="man" />男
+            <input type="radio" name="gender" value="woman" />女<br />
+            年&emsp;&emsp;龄:<input type="number" name="age" max="100" min="1" /><br />
+            职&emsp;&emsp;位:<input type="text" list="mylist" name="position" /><br />
+            <datalist id="mylist" name="position">
+                <option value="0">保洁员</option>
+                <option value="1">前台</option>
+                <option value="2">服务员</option>
+                <option value="3">经理</option>
+            </datalist>
+            电&emsp;&emsp;话:<input type="phone" name="phone" /><br />
+            身份证号:<input type="text" name="id" /><br />
+            <input type="reset" value="重置" />
+            <input type="submit" value="注册" />
+        </form>
     </div>
 </body>
 </html>
