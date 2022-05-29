@@ -79,7 +79,25 @@ namespace RMS_Dao
         public static List<Employee> selectAllEmployee()
         {
             string sql = "SELECT e_no, e_name, e_password, e_gender, e_age, e_position, e_tel, e_id FROM employee";
-            SqlParameter sqlParameter = new SqlParameter();
+            return sql2list(sql);
+        }
+
+        // 通过编号顺序显示所有员工
+        public static List<Employee> selectAllEmployeeOrder()
+        {
+            string sql = "SELECT e_no, e_name, e_password, e_gender, e_age, e_position, e_tel, e_id FROM employee ORDER BY(Employee.e_no)";
+            return sql2list(sql);
+        }
+        // 通过编号倒序显示所有员工
+        public static List<Employee> selectAllEmployeeIOrder()
+        {
+            string sql = "SELECT e_no, e_name, e_password, e_gender, e_age, e_position, e_tel, e_id FROM employee ORDER BY(Employee.e_no) DESC";
+            return sql2list(sql);
+        }
+
+
+        private static List<Employee> sql2list(string sql)
+        {
             List<Employee> employees = new List<Employee>(); ;
             using (SqlDataReader sqlDataReader = SqlHelper.executeReader(sql, null))
             {

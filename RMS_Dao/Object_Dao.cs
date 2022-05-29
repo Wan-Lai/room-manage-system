@@ -67,6 +67,26 @@ namespace RMS_Dao
         public static List<RObject> selectAllObject()
         {
             string sql = "SELECT o_no, o_name, o_number, o_price FROM mobject";
+            return sql2list(sql);
+        }
+
+        // 查询所有物品
+        public static List<RObject> selectAllObjectOrder()
+        {
+            string sql = "SELECT o_no, o_name, o_number, o_price FROM mobject ORDER BY(o_no)";
+            return sql2list(sql);
+        }
+
+        // 查询所有物品
+        public static List<RObject> selectAllObjectIOrder()
+        {
+            string sql = "SELECT o_no, o_name, o_number, o_price FROM mobject ORDER BY(o_no) DESC";
+            return sql2list(sql);
+        }
+
+        // 定义sql转list的方法
+        private static List<RObject> sql2list(string sql)
+        {
             SqlParameter sqlParameter = new SqlParameter();
             List<RObject> mobjects = null;
             using (SqlDataReader sqlDataReader = SqlHelper.executeReader(sql, null))

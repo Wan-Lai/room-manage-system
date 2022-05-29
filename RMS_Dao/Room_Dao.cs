@@ -67,9 +67,26 @@ namespace RMS_Dao
         public static List<Room> selectAllRoom()
         {
             string sql = "SELECT r_no, r_price, r_statu, r_type FROM room";
-            SqlParameter sqlParameter = new SqlParameter();
+            return sql2list(sql);
+        }
+        // 查询所有房间
+        public static List<Room> selectAllRoomOrder()
+        {
+            string sql = "SELECT r_no, r_price, r_statu, r_type FROM room ORDER BY(r_no)";
+            return sql2list(sql);
+        }
+
+        // 查询所有房间
+        public static List<Room> selectAllRoomIOrder()
+        {
+            string sql = "SELECT r_no, r_price, r_statu, r_type FROM room ORDER BY(r_no) DESC";
+            return sql2list(sql);
+        }
+
+        private static List<Room> sql2list(string sql)
+        {
             List<Room> rooms = null;
-            using (SqlDataReader sqlDataReader = SqlHelper.executeReader(sql, sqlParameter))
+            using (SqlDataReader sqlDataReader = SqlHelper.executeReader(sql, null))
             {
                 rooms = new List<Room>();
                 while (sqlDataReader.Read())

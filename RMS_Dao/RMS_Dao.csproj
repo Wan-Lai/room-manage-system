@@ -53,10 +53,6 @@
       <Project>{3c175460-137f-446a-8ee9-9187c83f8e63}</Project>
       <Name>RMS_Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\RMS_View\RMS_View.csproj">
-      <Project>{34985f1d-fe0f-4524-8374-74a170035657}</Project>
-      <Name>RMS_View</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
