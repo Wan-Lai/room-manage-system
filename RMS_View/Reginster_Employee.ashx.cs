@@ -19,7 +19,7 @@ namespace RMS_View
             string no = context.Request["no"];
             string username = context.Request["username"];
             string password = context.Request["password"];
-            int gender = context.Request["gender"]=="man"?1:0;
+            int gender = context.Request["gender"] == "man" ? 1 : 0;
             string age = context.Request["age"];
             string position = context.Request["position"];
             string phone = context.Request["phone"];

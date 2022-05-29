@@ -70,9 +70,9 @@
     <Content Include="css\login.css" />
     <Content Include="img\image1.jpg" />
     <Content Include="index.html" />
+    <Content Include="js\index.js" />
     <Content Include="login.html" />
     <Content Include="packages.config" />
-    <Content Include="EmployeeLogin.ashx" />
     <Content Include="GetInfo.ashx" />
     <Content Include="Reginster_Employee.ashx" />
     <None Include="Web.Debug.config">
@@ -87,9 +87,6 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EmployeeLogin.ashx.cs">
-      <DependentUpon>EmployeeLogin.ashx</DependentUpon>
-    </Compile>
     <Compile Include="GetInfo.ashx.cs">
       <DependentUpon>GetInfo.ashx</DependentUpon>
     </Compile>

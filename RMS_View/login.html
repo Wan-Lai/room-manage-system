@@ -52,7 +52,7 @@
                 } else {
                     $.ajax({
                         method: "post",
-                        url: "/EmployeeLogin.ashx/?username="+txt_username+"&password="+txt_password,
+                        url: "/GetInfo.ashx/?model=employee&type=login&username="+txt_username+"&password="+txt_password,
                         success: function (result) {
                             switch (result)
                             {
