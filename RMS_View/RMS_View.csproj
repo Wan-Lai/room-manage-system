@@ -69,6 +69,7 @@
     <Content Include="css\index.css" />
     <Content Include="css\login.css" />
     <Content Include="DataBase\RoomManager.mdf" />
+    <Content Include="dir\HtmlPage1.html" />
     <Content Include="img\image1.jpg" />
     <Content Include="index.html" />
     <Content Include="js\index.js" />
