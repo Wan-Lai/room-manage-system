@@ -1,5 +1,6 @@
-﻿using System;
-using RMS_Model;
+﻿using RMS_Model;
+using System;
+using System.Collections.Generic;
 
 namespace RMS_Dao
 {
@@ -9,15 +10,15 @@ namespace RMS_Dao
         {
             
             Employee employee = new Employee();
-            employee.EmployeeNo = 3;
-            employee.EmployeeName = "张三四";
+            employee.EmployeeNo = 2;
+            employee.EmployeeName = "李四";
             employee.EmployeePassword = "1234";
             employee.EmployeeGender = 1;
             employee.EmployeeAge = 21;
             employee.EmployeePosition = 1;
             employee.EmployeeTel = "12312311313";
             employee.EmployeeId = "64131313231231413131";
-
+            //Console.Write("数量：{0}", Employee_Dao.selectAllCount());
             // 添加员工
             // Console.WriteLine("执行结果:{0}", Employee_Dao.addEmployee(employee));
             // 删除员工
@@ -26,7 +27,9 @@ namespace RMS_Dao
             // Console.WriteLine("执行结果:{0}", Employee_Dao.modifyEmployee(1,employee));
             // 查询员工
             // List<Employee> employees = Employee_Dao.selectAllEmployee();
-            // Employee emp = Employee_Dao.selectEmployeeByName("张三");
+            Employee emp = Employee_Dao.selectEmployeeByName("admin");
+            Console.Write(emp);
+            Console.Write((bool)(emp==null));
             // Console.WriteLine("id:{0} tel:{1}", emp.EmployeeId, emp.EmployeeTel);
             /* foreach(Employee emp in employees)
             {
@@ -69,7 +72,9 @@ namespace RMS_Dao
             // 修改物品
             // Console.WriteLine("执行结果:{0}", Object_Dao.modifymobject(1, mobjcet));
             // 查询物品
-            // List<RObject> objs = Object_Dao.selectAllObject();
+            //  List<RObject> objs = Object_Dao.selectAllObject();
+            // RObject obj = Object_Dao.selectObjectByName("牙刷");
+            // Console.Write("id:{0} name:{1}", obj.ObjectName, obj.ObjectNumber);
             // RObject obj = Object_Dao.selectObjectByName("牙刷");
             // Console.WriteLine("id:{0} tel:{1}", obj.ObjectName, obj.ObjectNumber);
             /* foreach(RObject obj in objs)
@@ -90,13 +95,12 @@ namespace RMS_Dao
             // Console.WriteLine("执行结果:{0}", Room_Dao.modifyRoom("A001", room));
             // 查询房间
             // List<Room> rooms = Room_Dao.selectAllRoom();
-            Room mroom = Room_Dao.selectRoomByNo("A003");
-            Console.WriteLine("id:{0} tel:{1}", mroom.RoomNo, mroom.RoomPrice);
+            // Room mroom = Room_Dao.selectRoomByNo("A003");
+            // Console.WriteLine("id:{0} tel:{1}", mroom.RoomNo, mroom.RoomPrice);
             /* foreach(RObject obj in objs)
             {
                 Console.WriteLine("id:{0} name:{1}", obj.ObjectName, obj.ObjectNumber);
             }*/
-
         }
     }
 }
