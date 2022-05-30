@@ -85,7 +85,7 @@ function result2employee(result, employee_position) {
                     str += "<td>" + EMPLOYEE_POSITIONS[position] + "</td>";
                     str += "<td>" + tel + "</td>";
                     str += "<td>" + id + "</td>";
-                    str += "<td><input type='button' value='删除' onclick='deleteEmployee(" + no + ")'/><input type='button' value='修改' onclick='modifyEmployee(" + name + ")'/></td>";
+                    str += "<td><input type='button' value='删除' onclick='deleteEmployee(" + no + ")'/><input type='button' value='修改' onclick='modifyEmployee(\"" + name + "\")'/></td>";
                     str += "</tr>";
                     count++;
                 }
@@ -128,9 +128,10 @@ function result2guest(result) {
     console.log(result);
     var str = "";
     str += "<tr>";
+    str += "<td></td>";
     str += "<td colspan=2><input type='button' onclick='javascript:document.getElementsByClassName(\"dialog-reginster-guest\")[0].style.display=\"block\"' value='添加'/></td>";
     str += "<td colspan=2></td>";
-    str += "<td colspan=4><input type='text' placeholder='请输入姓名' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"guest\")'/></td>";
+    str += "<td colspan=3><input type='text' placeholder='请输入姓名' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"guest\")'/></td>";
     str += "</tr>";
     str += "<tr>";
     str += "<th><input type='checkbox' name='checkname'/></th>";
@@ -160,7 +161,7 @@ function result2guest(result) {
                 str += "<td>" + age + "</td>";
                 str += "<td>" + tel + "</td>";
                 str += "<td>" + id + "</td>";
-                str += "<td><input type='button' value='删除' onclick='deleteGuest(" + no + ")'/><input type='button' value='修改' onclick='modifyGuest(" + no + ")'/></td>";
+                str += "<td><input type='button' value='删除' onclick='deleteGuest(" + no + ")'/><input type='button' value='修改' onclick='modifyGuest(\"" + name + "\")'/></td>";
                 str += "</tr>";
                 count++;
             }
@@ -196,6 +197,7 @@ function result2room(result) {
     console.log(result);
     var str = "";
     str += "<tr>";
+    str += "<td></td>";
     str += "<td colspan=2><input type='button' onclick='javascript:document.getElementsByClassName(\"dialog-reginster-room\")[0].style.display=\"block\"' value='添加'/></td>";
     str += "<td colspan=1></td>";
     str += "<td colspan=3><input type='text' placeholder='请输入房号' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"room\")'/></td>";
@@ -222,7 +224,7 @@ function result2room(result) {
                 str += "<td>" + price + "</td>";
                 str += "<td>" + ROOM_STATUS[state] + "</td>";
                 str += "<td>" + ROOM_TYPES[type] + "</td>";
-                str += "<td><input type='button' value='删除' onclick='deleteRoom(" + no + ")'/><input type='button' value='修改' onclick='modifyRoom(" + no + ")'/></td>";
+                str += "<td><input type='button' value='删除' onclick='deleteRoom(" + no + ")'/><input type='button' value='修改' onclick='modifyRoom(\"" + no + "\")'/></td>";
                 str += "</tr>";
                 count++;
             }
@@ -257,8 +259,8 @@ function result2object(result) {
     var str = "";
     str += "<tr>";
     str += "<td colspan=1></td>";
-    str += "<td colspan=1></td>";
-    str += "<td colspan=4><input type='text' placeholder='请输入物品名称' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"room\")'/></td>";
+    str += "<td colspan=2><input type='button' onclick='javascript:document.getElementsByClassName(\"dialog-reginster-object\")[0].style.display=\"block\"' value='添加'/></td>";
+    str += "<td colspan=3><input type='text' placeholder='请输入物品名称' id='searchname'/><input type='button' value='搜索' onclick='searchByName(\"room\")'/></td>";
     str += "</tr>";
     str += "<tr>";
     str += "<td><input type='checkbox' name='checkname'/></td>"
@@ -283,7 +285,7 @@ function result2object(result) {
                 str += "<td>" + name + "</td>";
                 str += "<td>" + number + "</td>";
                 str += "<td>" + price + "</td>";
-                str += "<td><input type='button' value='删除' onclick='deleteObject(" + no + ")'/><input type='button' value='修改' onclick='modifyObject(" + no + ")'/></td>";
+                str += "<td><input type='button' value='删除' onclick='deleteObject(" + no + ")'/><input type='button' value='修改' onclick='modifyObject(\"" + name + "\")'/></td>";
                 str += "</tr>";
                 count++;
             }
@@ -294,7 +296,7 @@ function result2object(result) {
             str += "<td>" + result.ObjectName + "</td>";
             str += "<td>" + result.ObjectNumber + "</td>";
             str += "<td>" + result.ObjectPrice + "</td>";
-            str += "<td><input type='button' value='删除' onclick='deleteObject(" + no + ")'/><input type='button' value='修改' onclick='modifyObject(" + no + ")'/></td>";
+            str += "<td><input type='button' value='删除' onclick='deleteObject(" + no + ")'/><input type='button' value='修改' onclick='modifyObject(\"" + result.ObjectName + "\")'/></td>";
             str += "</tr>";
         }
         str += "<tr>";
@@ -404,10 +406,10 @@ function myAjax(url, model) {
                 case "addemployee":
                     var rst = eval("(" + result + ")");
                     if (rst.status == 1) {
-                        alert("添加成功");
+                        alert("操作成功");
                         myAjax("model=employee&type=page&page=1", "employee");
                     } else {
-                        alert("添加失败");
+                        alert("操作失败");
                     }
                     break;
                 case "deleteemployee":
@@ -426,10 +428,10 @@ function myAjax(url, model) {
                 case "addguest":
                     var rst = eval("(" + result + ")");
                     if (rst.status == 1) {
-                        alert("添加成功");
+                        alert("操作成功");
                         myAjax("model=guest&type=all", "guest");
                     } else {
-                        alert("添加失败:" + result);
+                        alert("操作失败:" + result);
                     }
                     break;
                 case "deleteguest":
@@ -446,10 +448,10 @@ function myAjax(url, model) {
                 case "addroom":
                     var rst = eval("(" + result + ")");
                     if (rst.status == 1) {
-                        alert("添加成功");
+                        alert("操作成功");
                         myAjax("model=room&type=all", "room");
                     } else {
-                        alert("添加失败:" + result);
+                        alert("操作失败:" + result);
                     }
                     break;
                 case "deleteroom":
@@ -470,6 +472,16 @@ function myAjax(url, model) {
                         myAjax("model=object&type=all", "object");
                     } else {
                         alert("删除失败:" + result);
+                    }
+                    break;
+
+                case "addobject":
+                    var rst = eval("(" + result + ")");
+                    if (rst.status == 1) {
+                        alert("操作成功");
+                        myAjax("model=object&type=all", "object");
+                    } else {
+                        alert("操作失败:" + result);
                     }
                     break;
             }
@@ -566,21 +578,28 @@ function modifyEmployee(pname) {
         url: "/GetInfo.ashx?model=employee&name="+ pname,
         success: function (result) {
             console.log(result);
-            /*var mform = document.getElementById("dialog-login");
-            mform.no.style.enable = "false";
-            var no = mform.no.value;
-            var username = mform.username.value;
-            var password = mform.password.value;
-            var gender = mform.gender.value;
-            var age = mform.age.value;
-            var position = mform.position.value;
-            var phone = mform.phone.value;
-            var id = mform.id.value;
-            if ((no == "") || (username == "") || (password == "") || (gender == "") || (age == "") || (position == "") || (phone == "") || (id == "")) {
-                alert("内容不全，请补全后再注册。");
-            } else {
-                myAjax("model=employee&type=add&no=" + no + "&username=" + username + "&password=" + password + "&gender=" + gender + "&age=" + age + "&position" + position + "&phone=" + phone + "&id=" + id, "addemployee")
-            }*/
+            var rst = eval("(" + result + ")");
+            var ipt_no = document.getElementById("eno");
+            var ipt_username = document.getElementById("eusername");
+            var ipt_password = document.getElementById("epassword");
+            var ipt_gender = document.getElementById("egender");
+            var ipt_age = document.getElementById("eage");
+            var ipt_position = document.getElementById("eposition");
+            var ipt_phone = document.getElementById("ephone");
+            var ipt_id = document.getElementById("eid");
+            var ipt_resetbtn = document.getElementById("ereset");
+            var ipt_btn = document.getElementById("ebtn");
+            ipt_no.value = rst.EmployeeNo;
+            ipt_username.value = rst.EmployeeName;
+            ipt_password.value = rst.EmployeePassword;
+            ipt_gender.value = rst.EmployeeGender;
+            ipt_age.value = rst.EmployeeAge;
+            ipt_position.value = rst.EmployeePosition;
+            ipt_phone.value = rst.EmployeeTel;
+            ipt_id.value = rst.EmployeeId;
+            ipt_no.setAttribute("readOnly", true);
+            ipt_username.setAttribute("readOnly", true);
+            ipt_btn.value = "修改";
         }
     });
 };
@@ -602,17 +621,104 @@ function addGuest() {
     }
 }
 
+function modifyGuest(pname) {
+    document.getElementsByClassName("dialog-reginster-guest")[0].style.display = "block";
+    $.ajax({
+        method: "post",
+        url: "/GetInfo.ashx?model=guest&name=" + pname,
+        success: function (result) {
+            console.log(result);
+            var rst = eval("(" + result + ")");
+            var ipt_no = document.getElementById("gno");
+            var ipt_username = document.getElementById("gusername");
+            var ipt_gender = document.getElementById("ggender");
+            var ipt_age = document.getElementById("gage");
+            var ipt_phone = document.getElementById("gphone");
+            var ipt_id = document.getElementById("gid");
+            var ipt_btn = document.getElementById("gbtn");
+            ipt_no.value = rst.GuestNo;
+            ipt_username.value = rst.GuestName;
+            ipt_gender.value = rst.GuestGender;
+            ipt_age.value = rst.GuestAge;
+            ipt_phone.value = rst.GuestTel;
+            ipt_id.value = rst.GuestId;
+            ipt_no.setAttribute("readOnly", true);
+            ipt_username.setAttribute("readOnly", true);
+            ipt_btn.value = "修改";
+        }
+    });
+};
+
+function modifyRoom(pno) {
+    document.getElementsByClassName("dialog-reginster-room")[0].style.display = "block";
+    $.ajax({
+        method: "post",
+        url: "/GetInfo.ashx?model=room&name=" + pno,
+        success: function (result) {
+            console.log(result);
+            var rst = eval("(" + result + ")");
+            var ipt_no = document.getElementById("rno");
+            var ipt_price = document.getElementById("rprice");
+            var ipt_statu = document.getElementById("rstatu");
+            var ipt_type = document.getElementById("rtype");
+            var ipt_btn = document.getElementById("rbtn");
+            ipt_no.value = rst.RoomNo;
+            ipt_price.value = rst.RoomPrice;
+            ipt_statu.value = rst.RoomStatu;
+            ipt_type.value = rst.RoomType;
+            ipt_no.setAttribute("readOnly", true);
+            ipt_btn.value = "修改";
+        }
+    });
+};
+
+function modifyObject(pname) {
+    document.getElementsByClassName("dialog-reginster-object")[0].style.display = "block";
+    $.ajax({
+        method: "post",
+        url: "/GetInfo.ashx?model=object&name=" + pname,
+        success: function (result) {
+            console.log(result);
+            var rst = eval("(" + result + ")");
+            var ipt_no = document.getElementById("ono");
+            var ipt_name = document.getElementById("oname");
+            var ipt_number = document.getElementById("onumber");
+            var ipt_price = document.getElementById("oprice");
+            var ipt_btn = document.getElementById("obtn");
+            ipt_no.value = rst.ObjectNo;
+            ipt_name.value = rst.ObjectName;
+            ipt_number.value = rst.ObjectNumber;
+            ipt_price.value = rst.ObjectPrice;
+            ipt_no.setAttribute("readOnly", true);
+            ipt_btn.value = "修改";
+        }
+    });
+};
+
 function addRoom() {
     var mform = document.getElementById("dialog-login-room");
     var no = mform.no.value;
     var price = mform.price.value;
     var statu = mform.statu.value;
     var type = mform.type.value;
-    console.log(no+":"+price+":"+statu+":"+type);
     if ((no == "") || (price == "") || (statu == "") || (type == "")) {
         alert("内容不全，请补全后再注册。");
     } else {
-        myAjax("model=room&type=add&no=" + no + "&price=" + price + "&statu=" + statu + "&type=" + type, "addroom")
+        myAjax("model=room&type=add&no=" + no + "&price=" + price + "&statu=" + statu + "&rtype=" + type, "addroom")
+    }
+}
+
+function addObject() {
+    var mform = document.getElementById("dialog-login-object");
+    var no = mform.no.value;
+    var name = mform.name.value;
+    var number = mform.number.value;
+    var price = mform.price.value;
+    console.log(no + ":" + name + ":" + number + ":" + price);
+    if ((no == '') || (name == '') || (number == '') || (price == '')) {
+        alert("内容不全，请补全后再注册。");
+    } else {
+        myAjax("model=object&type=add&no=" + no + "&oname=" + name + "&number=" + number + "&price=" + price, "addobject")
     }
 }
 

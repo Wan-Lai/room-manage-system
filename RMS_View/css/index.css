@@ -123,7 +123,9 @@ color: purple;
 }
 
 .dialog-reginster-employee form, 
-.dialog-reginster-guest form{
+.dialog-reginster-guest form,
+.dialog-reginster-room form,
+.dialog-reginster-object form{
     height: 100%;
     width: 100%;
     background-color: rgba(0,0,0,0.4);
@@ -134,7 +136,9 @@ color: purple;
 }
 
 .dialog-reginster-employee form, 
-.dialog-reginster-guest form{
+.dialog-reginster-guest form,
+.dialog-reginster-room form, 
+.dialog-reginster-object form{
     height:300px;
     width: 300px;
     margin: 100px auto;
@@ -145,7 +149,9 @@ color: purple;
 
 
 .dialog-reginster-employee input,
-.dialog-reginster-guest input {
+.dialog-reginster-guest input,
+.dialog-reginster-room input,
+.dialog-reginster-object input {
     margin: 5px 0;
     border-radius: 5px;
     border: 0;

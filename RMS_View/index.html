@@ -57,22 +57,20 @@
             </datalist>
             电&emsp;&emsp;话:<input id="ephone" type="tel" name="phone" /><br />
             身份证号:<input type="text" id="eid" name="id" /><br />
-            <input type="reset" value="重置" />
-            <input type="button" onclick="addEmployee()" value="注册" />
+            <input type="button" id="ebtn" onclick="addEmployee()" value="注册" />
         </form>
     </div>
     <div class="dialog-reginster-guest" style="display:none">
         <form id="dialog-login-guest">
             <div style="height:20px;width:20px;color:white;margin-top:15px;margin-left:10px;" onclick='javascript:document.getElementsByClassName("dialog-reginster-guest")[0].style.display="none"'>x</div>
-            编&emsp;&emsp;号:<input type="text" id="eno" name="no" /><br />
-            姓&emsp;&emsp;名:<input type="text" id="eusername" name="username" /><br />
-            性&emsp;&emsp;别:<input type="radio" id="egender" name="gender" value="man" checked />男
+            编&emsp;&emsp;号:<input type="text" id="gno" name="no" /><br />
+            姓&emsp;&emsp;名:<input type="text" id="gusername" name="username" /><br />
+            性&emsp;&emsp;别:<input type="radio" id="ggender" name="gender" value="man" checked />男
             <input type="radio" name="gender" value="woman" />女<br />
-            年&emsp;&emsp;龄:<input type="number" id="eage" name="age" max="100" min="1" /><br />
-              电&emsp;&emsp;话:<input id="ephone" type="tel" name="phone" /><br />
-            身份证号:<input type="text" id="eid" name="id" /><br />
-            <input type="reset" value="重置" />
-            <input type="button" onclick="addGuest()" value="添加" />
+            年&emsp;&emsp;龄:<input type="number" id="gage" name="age" max="100" min="1" /><br />
+              电&emsp;&emsp;话:<input id="gphone" type="tel" name="phone" /><br />
+            身份证号:<input type="text" id="gid" name="id" /><br />
+            <input type="button" id="gbtn" onclick="addGuest()" value="添加" />
         </form>
     </div>
 
@@ -80,11 +78,21 @@
         <form id="dialog-login-room">
             <div style="height:20px;width:20px;color:white;margin-top:15px;margin-left:10px;" onclick='javascript:document.getElementsByClassName("dialog-reginster-room")[0].style.display="none"'>x</div>
             编号:<input type="text" id="rno" name="no" /><br />
-            价格:<input type="text" id="rusername" name="price" /><br />
-            状态:<input type="text" id="rno" name="statu" /><br />
-            类型:<input type="text" id="rusername" name="type" /><br />
-            <input type="reset" value="重置" />
-            <input type="button" onclick="addRoom()" value="添加" />
+            价格:<input type="text" id="rprice" name="price" /><br />
+            状态:<input type="text" id="rstatu" name="statu" /><br />
+            类型:<input type="text" id="rtype" name="type" /><br />
+            <input type="button" id="rbtn" onclick="addRoom()" value="添加" />
+        </form>
+    </div>
+
+    <div class="dialog-reginster-object" style="display:none">
+        <form id="dialog-login-object">
+            <div style="height:20px;width:20px;color:white;margin-top:15px;margin-left:10px;" onclick='javascript:document.getElementsByClassName("dialog-reginster-object")[0].style.display="none"'>x</div>
+            编号:<input type="text" id="ono" name="no" /><br />
+            名称:<input type="text" id="oname" name="name" /><br />
+            数量:<input type="text" id="onumber" name="number" /><br />
+            价格:<input type="text" id="oprice" name="price" /><br />
+            <input type="button"  id="obtn" onclick="addObject()" value="添加" />
         </form>
     </div>
 </body>
