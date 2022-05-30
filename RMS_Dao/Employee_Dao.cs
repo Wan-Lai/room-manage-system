@@ -1,4 +1,5 @@
 ﻿using RMS_Model;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 
@@ -92,6 +93,12 @@ namespace RMS_Dao
         public static List<Employee> selectAllEmployeeIOrder()
         {
             string sql = "SELECT e_no, e_name, e_password, e_gender, e_age, e_position, e_tel, e_id FROM employee ORDER BY(Employee.e_no) DESC";
+            return sql2list(sql);
+        }
+
+        // 通过页面查询
+        public static List<Employee> selectAllEmployeeByPage(int pagesize, int page) {
+            string sql = "SELECT TOP " + pagesize + " * FROM Employee WHERE e_no NOT IN(SELECT TOP " + (page-1) * pagesize + " e_no FROM employee ORDER BY e_no) ORDER BY e_no";
             return sql2list(sql);
         }
 

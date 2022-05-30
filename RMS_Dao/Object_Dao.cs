@@ -66,21 +66,21 @@ namespace RMS_Dao
         // 查询所有物品
         public static List<RObject> selectAllObject()
         {
-            string sql = "SELECT o_no, o_name, o_number, o_price FROM mobject";
+            string sql = "SELECT o_no, o_name, o_number, o_price FROM object";
             return sql2list(sql);
         }
 
         // 查询所有物品
         public static List<RObject> selectAllObjectOrder()
         {
-            string sql = "SELECT o_no, o_name, o_number, o_price FROM mobject ORDER BY(o_no)";
+            string sql = "SELECT o_no, o_name, o_number, o_price FROM object ORDER BY(o_no)";
             return sql2list(sql);
         }
 
         // 查询所有物品
         public static List<RObject> selectAllObjectIOrder()
         {
-            string sql = "SELECT o_no, o_name, o_number, o_price FROM mobject ORDER BY(o_no) DESC";
+            string sql = "SELECT o_no, o_name, o_number, o_price FROM object ORDER BY(o_no) DESC";
             return sql2list(sql);
         }
 
