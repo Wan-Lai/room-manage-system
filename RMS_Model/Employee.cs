@@ -5,7 +5,7 @@ namespace RMS_Model
     // 定义员工实体
     public class Employee
     {
-        private string[] POSITIONS = {"前台", "服务员", "经理"};
+        private string[] POSITIONS = {"保洁员" ,"前台", "服务员", "经理"};
         // 员工编号
         public int EmployeeNo
         {
