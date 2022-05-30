@@ -48,8 +48,8 @@
             性&emsp;&emsp;别:<input type="radio" id="egender" name="gender" value="man" checked/>男
             <input type="radio" name="gender" value="woman" />女<br />
             年&emsp;&emsp;龄:<input type="number" id="eage" name="age" max="100" min="1" /><br />
-            职&emsp;&emsp;位:<input type="text" id="eposition" list="mylist" name="position" /><br />
-            <datalist id="mylist" name="position">
+            职&emsp;&emsp;位:<input type="text" id="eposition" list="mylist1" name="position" /><br />
+            <datalist id="mylist1" name="position">
                 <option value="0">保洁员</option>
                 <option value="1">前台</option>
                 <option value="2">服务员</option>
@@ -79,8 +79,21 @@
             <div style="height:20px;width:20px;color:white;margin-top:15px;margin-left:10px;" onclick='javascript:document.getElementsByClassName("dialog-reginster-room")[0].style.display="none"'>x</div>
             编号:<input type="text" id="rno" name="no" /><br />
             价格:<input type="text" id="rprice" name="price" /><br />
-            状态:<input type="text" id="rstatu" name="statu" /><br />
-            类型:<input type="text" id="rtype" name="type" /><br />
+            状态:<input type="text" id="rstatu" list="mylist2" name="statu" /><br />
+            <datalist id="mylist2">
+                <option value="0">空闲</option>
+                <option value="1">已住人</option>
+                <option value="2">预约</option>
+                <option value="3">维修</option>
+            </datalist>
+            类型:<input type="text" id="rtype" list="mylist3" name="type" />
+            <datalist id="mylist3">
+                <option value="0">单人房</option>
+                <option value="1">标准房</option>
+                <option value="2">豪华房</option>
+                <option value="3">商务房</option>
+            </datalist>
+            <br />
             <input type="button" id="rbtn" onclick="addRoom()" value="添加" />
         </form>
     </div>

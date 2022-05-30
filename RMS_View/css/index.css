@@ -1,165 +1,192 @@
-﻿  * {
-    padding: 0;
-    margin: 0;
-    transition: all .3s;
-}
+﻿      * {
+        padding: 0;
+        margin: 0;
+        transition: all .3s;
+    }
 
-body {
-    border: 10px solid #FFF;
-    border-radius: 20px;
-    background-color: #FFF;
-}
+    body {
+        border: 10px solid #FFF;
+        border-radius: 20px;
+        background-color: #FFF;
+    }
 
-body:hover {
-    border: 10px solid #EEE;
-    transform: scale(0.95);
-    box-shadow: 0 0 5px black;
-    background-color: #EEE;
-}
+    body:hover {
+        border: 10px solid #EEE;
+        transform: scale(0.95);
+        box-shadow: 0 0 5px black;
+        background-color: #EEE;
+    }
 
-.header {
-    height: 100px;
-    width: 100%;
-}
+    .header {
+        height: 100px;
+        width: 100%;
+    }
 
-.header > div.border {
-    height: 90px;
-    width: 100%;
-    border-radius: 10px 10px 0 0;
-    border-bottom: 10px solid #EEE;
-    background-image: url("../img/image1.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
+    .header > div.border {
+        height: 90px;
+        width: 100%;
+        border-radius: 10px 10px 0 0;
+        border-bottom: 10px solid #EEE;
+        background-image: url("../img/image1.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
 
-div.border > label:first-child {
-    font-size: 20px;
-    display: block;
-    padding-top: 20px;
+    div.border > label:first-child {
+        font-size: 20px;
+        display: block;
+        padding-top: 20px;
+        margin-left: 3%;
+    }
+
+    div.border > label:nth-child(2) {
+    font-size: 13px;
     margin-left: 3%;
-}
+    }
 
-div.border > label:nth-child(2) {
-font-size: 13px;
-margin-left: 3%;
-}
-
-div.border > label > b {
-color: purple;
-}
+    div.border > label > b {
+    color: purple;
+    }
 
 
-.main {
-    width: 100%;
-    height: 400px;
-    background-color:#FFF;
-    both: clean;
-}
+    .main {
+        width: 100%;
+        height: 400px;
+        background-color:#FFF;
+        both: clean;
+    }
 
-.main > div.detail {
-    height: 70px;
-    width: 20px;
-    left: 20%;
-    top: 43%;
-    border: 3px solid #EEE;
-    border-left: 0;
-    border-radius: 0 10px 10px 0;
-    line-height: 70px;
-    background-color: #FFF;
-    position: absolute;
-}
+    .main > div.detail {
+        height: 70px;
+        width: 20px;
+        left: 20%;
+        top: 43%;
+        border: 3px solid #EEE;
+        border-left: 0;
+        border-radius: 0 10px 10px 0;
+        line-height: 70px;
+        background-color: #FFF;
+        position: absolute;
+    }
 
-.main > div.detail:hover {
-    opacity: 0.8;
-}
+    .main > div.detail:hover {
+        opacity: 0.8;
+    }
 
-.main > div.main-left {
-    width: 20%;
-    height: 100%;
-    border-right: 3px solid #EEE;
-    background-color: #FFF;
-    float: left;
-}
+    .main > div.main-left {
+        width: 20%;
+        height: 100%;
+        border-right: 3px solid #EEE;
+        background-color: #FFF;
+        float: left;
+    }
 
-.main-left > ul > li {
-    height: 50px;
-    width: 100%;
-    font-size: 20px;
-    line-height: 50px;
-    list-style: none;
-}
+    .main-left > ul > li {
+        height: 50px;
+        width: 100%;
+        font-size: 20px;
+        line-height: 50px;
+        list-style: none;
+    }
 
-.main-left > ul > li.list-1 {
-    box-sizing: border-box;
-    border-bottom: 2px solid grey;
-    display: flex;
-    justify-content: space-between;
-}
+    .main-left > ul > li.list-1 {
+        box-sizing: border-box;
+        border-bottom: 2px solid grey;
+        display: flex;
+        justify-content: space-between;
+    }
 
-.main-left > ul > li.list-2 {
-    border-bottom: 1px solid grey;
-    padding-left: 40px;
-}
+    .main-left > ul > li.list-2 {
+        border-bottom: 1px solid grey;
+        padding-left: 40px;
+    }
 
-.main-left > ul > li.list-1 label {
-    margin-left: 10px;
-}
+    .main-left > ul > li.list-1 label {
+        margin-left: 10px;
+    }
 
-.main-left > ul > li.list-1:after {
-    content: ">";
-}
+    .main-left > ul > li.list-1:after {
+        content: ">";
+    }
 
-.main-right {
-    width: 79%;
-    height: 100%;
-    float: left;
-    background-color: #FFF;
-}
+    .main-right {
+        width: 79%;
+        height: 100%;
+        float: left;
+        background-color: #FFF;
+    }
 
-.main-right table {
-    width:500px;
-    height:300px;
-}
+    .main-right table {
+        width:90%;
+    }
 
-.dialog-reginster-employee form, 
-.dialog-reginster-guest form,
-.dialog-reginster-room form,
-.dialog-reginster-object form{
-    height: 100%;
-    width: 100%;
-    background-color: rgba(0,0,0,0.4);
-    position: absolute;
-    top:0;
-    left:0;
-    text-align:center;
-}
+    .main-right td ,
+    .main-right th {
+        height:40px;
+        padding:5px 10px;
+        border-radius:5px;
+        text-align:center;
+    }
 
-.dialog-reginster-employee form, 
-.dialog-reginster-guest form,
-.dialog-reginster-room form, 
-.dialog-reginster-object form{
-    height:300px;
-    width: 300px;
-    margin: 100px auto;
-    border-radius: 30px;
-    color:white;
-    background-color:black;
-}
+    .main-right tr>td:nth-child(2n){
+        background-color: #EEE;
+    }
+
+    .main-right tr:first-child {
+        background-color: #DDD;
+    }
+
+    .main-right td input[type="text"] {
+        height: 30px;
+        width:48%;
+        margin:0 1%;
+        border:1px solid gray;
+        border-radius:5px;
+        font-size: 18px;
+    }
+
+    .main-right td input[type="button"] {
+        height: 30px;
+        width: 40px;
+        margin: 0 10px;
+    }
+
+    .dialog-reginster-employee, 
+    .dialog-reginster-guest,
+    .dialog-reginster-room,
+    .dialog-reginster-object{
+        height: 100%;
+        width: 100%;
+        background-color: rgba(0,0,0,0.4);
+        position: absolute;
+        top:0;
+        left:0;
+        text-align:center;
+    }
+
+    .dialog-reginster-employee form, 
+    .dialog-reginster-guest form,
+    .dialog-reginster-room form, 
+    .dialog-reginster-object form{
+        height:300px;
+        width: 300px;
+        margin: 100px auto;
+        border-radius: 30px;
+        color:white;
+        background-color:black;
+    }
 
 
-.dialog-reginster-employee input,
-.dialog-reginster-guest input,
-.dialog-reginster-room input,
-.dialog-reginster-object input {
-    margin: 5px 0;
-    border-radius: 5px;
-    border: 0;
-}
+    .dialog-reginster-employee input,
+    .dialog-reginster-guest input,
+    .dialog-reginster-room input,
+    .dialog-reginster-object input {
+        height: 20px;
+        margin: 5px 0;
+        font-size: 18px;
+        border-radius: 5px;
+        border: 0;
+    }
 
 
-.main-right td , .main-right th {
-    margin: 20px;
-    padding:10px 20px;
-    border:1px solid red;
-}
