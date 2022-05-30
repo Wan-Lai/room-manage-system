@@ -84,6 +84,13 @@ namespace RMS_Dao
             return sql2list(sql);
         }
 
+        // 通过页面查询
+        public static List<RObject> selectObjectByPage(int pagesize, int page)
+        {
+            string sql = "SELECT TOP " + pagesize + " * FROM Object WHERE o_no NOT IN(SELECT TOP " + (page - 1) * pagesize + " o_no FROM Object ORDER BY o_no) ORDER BY o_no";
+            return sql2list(sql);
+        }
+
         // 定义sql转list的方法
         private static List<RObject> sql2list(string sql)
         {

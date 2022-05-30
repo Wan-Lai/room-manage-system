@@ -88,6 +88,13 @@ namespace RMS_Dao
             return sql2list(sql);
         }
 
+        // 通过页面查询
+        public static List<Guest> selectGuestByPage(int pagesize, int page)
+        {
+            string sql = "SELECT TOP " + pagesize + " * FROM Guest WHERE g_no NOT IN(SELECT TOP " + (page - 1) * pagesize + " g_no FROM Guest ORDER BY g_no) ORDER BY g_no";
+            return sql2list(sql);
+        }
+
         private static List<Guest> sql2list(string sql)
         {
             List<Guest> guests = null;

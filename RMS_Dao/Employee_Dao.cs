@@ -97,8 +97,8 @@ namespace RMS_Dao
         }
 
         // 通过页面查询
-        public static List<Employee> selectAllEmployeeByPage(int pagesize, int page) {
-            string sql = "SELECT TOP " + pagesize + " * FROM Employee WHERE e_no NOT IN(SELECT TOP " + (page-1) * pagesize + " e_no FROM employee ORDER BY e_no) ORDER BY e_no";
+        public static List<Employee> selectEmployeeByPage(int position, int pagesize, int page) {
+            string sql = "SELECT TOP " + pagesize + " * FROM Employee WHERE  e_position <= " + position + " AND  e_no NOT IN(SELECT TOP " + (page-1) * pagesize + " e_no FROM employee ORDER BY e_no) ORDER BY e_no";
             return sql2list(sql);
         }
 
