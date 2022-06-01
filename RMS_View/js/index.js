@@ -3,7 +3,6 @@ var EMPLOYEE_POSITIONS = ["保洁员", "前台", "服务员", "经理"];
 var ROOM_STATUS = ["空闲", "已住人", "预约", "维修"];
 var ROOM_TYPES = ["单人房", "标准房", "豪华房", "商务房"];
 window.onload = function () {
-
     var cookies = document.cookie;
     if (cookies.indexOf("preemployee=") == -1) {
         document.location.href = "/login.html";
@@ -21,8 +20,7 @@ window.onload = function () {
         console.log("欢迎" + EMPLOYEE_POSITIONS[employee_position] + ":" + employee_username + "登录");
         console.log("position=" + employee_position);
         document.getElementById("cookie_username").innerHTML = EMPLOYEE_POSITIONS[employee_position] + ":" + employee_username;
-    
-        //myAjax("model=employee&type=page&page=1", "employee");
+        // myAjax("model=employee&type=page&page=1", "employee");
         changeEmployee();
     }
 }
@@ -327,9 +325,10 @@ function deleteEmployee(no) {
 // 修改员工
 function modifyEmployee(pname) {
     document.getElementsByClassName("dialog-reginster-employee")[0].style.display = "block";
+    // console.log("name:"+pname);
     $.ajax({
         method: "post",
-        url: "/GetInfo.ashx?model=employee&name="+ pname,
+        url: "/GetInfo.ashx?model=employee&type=name&name=" + pname,
         success: function (result) {
             console.log(result);
             var rst = eval("(" + result + ")");
@@ -386,7 +385,7 @@ function modifyGuest(pname) {
     document.getElementsByClassName("dialog-reginster-guest")[0].style.display = "block";
     $.ajax({
         method: "post",
-        url: "/GetInfo.ashx?model=guest&name=" + pname,
+        url: "/GetInfo.ashx?model=guest&type=name&name=" + pname,
         success: function (result) {
             console.log(result);
             var rst = eval("(" + result + ")");
@@ -435,7 +434,7 @@ function modifyRoom(pno) {
     document.getElementsByClassName("dialog-reginster-room")[0].style.display = "block";
     $.ajax({
         method: "post",
-        url: "/GetInfo.ashx?model=room&name=" + pno,
+        url: "/GetInfo.ashx?model=room&type=name&name=" + pno,
         success: function (result) {
             console.log(result);
             var rst = eval("(" + result + ")");
@@ -480,7 +479,7 @@ function modifyObject(pname) {
     document.getElementsByClassName("dialog-reginster-object")[0].style.display = "block";
     $.ajax({
         method: "post",
-        url: "/GetInfo.ashx?model=object&name=" + pname,
+        url: "/GetInfo.ashx?model=object&type=name&name=" + pname,
         success: function (result) {
             console.log(result);
             var rst = eval("(" + result + ")");
@@ -580,7 +579,7 @@ function result2employee(result, pagenum) {
                 str += "<td>" + EMPLOYEE_POSITIONS[result.EmployeePosition] + "</td>";
                 str += "<td>" + result.EmployeeTel + "</td>";
                 str += "<td>" + result.EmployeeId + "</td>";
-                str += "<td><input type='button' value='删除' onclick='deleteEmployee(" + no + ")'/><input type='button' value='修改' onclick='modifyEmployee(" + no + ")'/></td>";
+                str += "<td><input type='button' value='删除' onclick='deleteEmployee(" + no + ")'/><input type='button' value='修改' onclick='modifyEmployee(" + name + ")'/></td>";
                 str += "</tr>";
             } else {
                 alert("权限不足，无法查看。");
