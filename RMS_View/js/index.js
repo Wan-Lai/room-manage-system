@@ -20,7 +20,6 @@ window.onload = function () {
         console.log("欢迎" + EMPLOYEE_POSITIONS[employee_position] + ":" + employee_username + "登录");
         console.log("position=" + employee_position);
         document.getElementById("cookie_username").innerHTML = EMPLOYEE_POSITIONS[employee_position] + ":" + employee_username;
-        // myAjax("model=employee&type=page&page=1", "employee");
         changeEmployee();
     }
 }
